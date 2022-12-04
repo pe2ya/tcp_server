@@ -14,19 +14,23 @@ namespace Server
         private TcpListener myServer;
         private bool isRurung;
         private List<Client> clients = new List<Client>();
-        private Users users = new Users("u.txt");
-        private Messages messages = new Messages("m.txt");
+        private Users users = new Users();
+        private Messages messages = new Messages();
+        private string ip = Stat.GetConf("ServerIP");
 
 
         public Server(int port)
         {
-            //myServer = new TcpListener(localaddr: System.Net.IPAddress.Parse("127.0.0.1"), port: port);
-            myServer = new TcpListener(localaddr: System.Net.IPAddress.Any, port: port);
-            isRurung = true;
-            myServer.Start();
-
             try
             {
+                //myServer = new TcpListener(localaddr: System.Net.IPAddress.Any, port: port);
+                myServer = new TcpListener(localaddr: System.Net.IPAddress.Parse(ip), port: port);
+                isRurung = true;
+                myServer.Start();
+
+                messages.Initialize();
+                users.Initialize();
+
                 LoopServer();
             }
             catch (Exception e)
@@ -35,11 +39,10 @@ namespace Server
             }
             finally
             {
-                users.WriteToFile("u.txt");
-                messages.WriteToFile("m.txt");
+                users.Save();
+                messages.Save();
+                myServer.Stop();
             }
-            
-
         }
 
         public void LoopServer()
@@ -130,9 +133,11 @@ namespace Server
                             password = cl.Read();
 
                             cl.user = new User(name, login, password);
+                            users.Add(cl.user);
 
                             loggined = true;
                             clients.Add(cl);
+                            users.Save();
 
                             break;
                         default:
@@ -141,6 +146,7 @@ namespace Server
                     }
 
                 }
+            
                 Broadcast($"+++ {cl.user.Login} arrived +++");
 
                 cl.Print("Type /quit for disconnect");
@@ -152,11 +158,11 @@ namespace Server
 
                     Broadcast();
                     msg = cl.Read();
-                    cl.user.Disconnect = DateTime.Now;
+                    cl.user.LastSeen = DateTime.Now;
 
                     if (msg == "/quit")
                     {
-                        Broadcast($"+++ {cl.user.Login} go for a walk +++");
+                        Broadcast($"+++ {cl.user} go for a walk +++");
                         clients.Remove(cl);
                         clientRunning = false;
                         break;
@@ -176,6 +182,7 @@ namespace Server
 
 
                 users.UpdateTime(cl.user);
+                users.Save();
                 cl.Close();
             }
             catch (Exception e)
@@ -198,6 +205,8 @@ namespace Server
             foreach (Client cl in clients)
             {
                 cl.Print(messages.GetMessagesForUser(cl.user));
+                cl.user.LastSeen = DateTime.Now;
+                
             }
         }
     }

@@ -9,14 +9,14 @@ namespace Server
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public DateTime Disconnect { get; set; }
+        public DateTime LastSeen { get; set; }
 
         public User() { }
 
         public User(string login, string password) {
             Login = login;
             Password = password;
-            Disconnect = DateTime.Now;
+            LastSeen = DateTime.Now;
         }
 
         public User(string name, string login, string password)
@@ -24,7 +24,7 @@ namespace Server
             Name = name;
             Login = login;
             Password = password;
-            Disconnect = DateTime.Now;
+            LastSeen = DateTime.Now;
         }
 
         public bool Compare(User other)
@@ -37,7 +37,7 @@ namespace Server
 
         public override string ToString()
         {
-            return Name;
+            return Login;
         }
     }
 }

@@ -8,43 +8,21 @@ using System.Linq;
 namespace Server
 {
     class Messages
-    {
+    {   
+
         private List<Message> messages = new List<Message>();
+        private string path = Stat.GetConf("MessagesFilePath");
 
         public Messages() { }
 
-        public Messages(List<Message> ms) {
-            this.messages = ms;
-        }
-
-        public Messages(string filename) {
-            GetFromFile(filename);
-        }
-
-        public void WriteToFile(string filename)
+        public void Initialize()
         {
-            string jsonString = JsonSerializer.Serialize(messages);
-
-            if (!File.Exists(filename))
+            if (!File.Exists(path))
             {
-                using StreamWriter sw = new StreamWriter(new FileStream(filename, FileMode.Create));
+                using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
             }
 
-            File.WriteAllText(filename, jsonString);
-        }
-
-        public void GetFromFile(string filename)
-        {
-            string jsonstring = File.ReadAllText(filename);
-
-            if (!string.IsNullOrEmpty(jsonstring))
-            {
-                messages = JsonSerializer.Deserialize<List<Message>>(jsonstring);
-            }
-            else
-            {
-                messages = new List<Message>();
-            }
+            GetFromFile(path);
         }
 
         public void Add(Message m)
@@ -60,15 +38,41 @@ namespace Server
         public List<Message> AllMessages()
         {
             return messages;
-        } 
+        }
 
-        public List<Message> GetMessagesForUser(User u )
+        public List<Message> GetMessagesForUser(User u)
         {
-            List<Message> result = messages.Where((x) => { 
-                return DateTime.Compare(x.Time, u.Disconnect) > 0 && x.user.Login != u.Login;
+            List<Message> result = messages.Where((x) => {
+                return DateTime.Compare(x.Time, u.LastSeen) > 0 && x.Sender.Login != u.Login;
             }).ToList();
 
             return result;
+        }
+
+        public void Save()
+        {
+            string jsonString = JsonSerializer.Serialize(messages);
+
+            if (!File.Exists(path))
+            {
+                using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
+            }
+
+            File.WriteAllText(path, jsonString);
+        }
+
+        public void GetFromFile(string filename)
+        {
+            string jsonstring = File.ReadAllText(filename);
+
+            if (!string.IsNullOrEmpty(jsonstring))
+            {
+                messages = JsonSerializer.Deserialize<List<Message>>(jsonstring);
+            }
+            else
+            {
+                messages = new List<Message>();
+            }
         }
     }
 }

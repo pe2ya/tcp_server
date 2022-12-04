@@ -7,20 +7,20 @@ namespace Server
     class Message
     {
         public string Text { get; set; }
-        public User user { get; set; }
+        public User Sender { get; set; }
         public DateTime Time { get; set; }
 
         public Message() { }
 
         public Message(string text, User u) {
             Text = text;
-            user = u;
+            Sender = u;
             Time = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"{user.Login} >> {Text}";
+            return $"{Sender.Login} >> {Text}";
         }
     }
 }

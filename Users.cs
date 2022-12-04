@@ -9,17 +9,18 @@ namespace Server
     class Users
     {
         private List<User> users = new List<User>();
+        private string path = Stat.GetConf("UsersFilePath");
 
         public Users() { }
 
-        public Users(List<User> us)
+        public void Initialize()
         {
-            users = us;
-        }
+            if (!File.Exists(path))
+            {
+                using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
+            }
 
-        public Users(string filename) 
-        {
-            GetFromFile(filename);
+            GetFromFile(path);
         }
 
         public void Add(User u) 
@@ -33,7 +34,7 @@ namespace Server
 
         public void UpdateTime(User u)
         {
-            u.Disconnect = DateTime.Now;
+            u.LastSeen = DateTime.Now;
             users.Add(u);
         }
 
@@ -67,16 +68,16 @@ namespace Server
             return users.Contains(u);
         }
 
-        public void WriteToFile(string filename)
+        public void Save()
         {
             string jsonString = JsonSerializer.Serialize(users);
 
-            if (!File.Exists(filename))
+            if (!File.Exists(path))
             {
-                using StreamWriter sw = new StreamWriter(new FileStream(filename, FileMode.Create));
+                using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
             }
 
-            File.WriteAllText(filename, jsonString);
+            File.WriteAllText(path, jsonString);
         }
 
         public void GetFromFile(string filename)
