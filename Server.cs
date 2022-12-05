@@ -41,7 +41,6 @@ namespace Server
             {
                 users.Save();
                 messages.Save();
-                myServer.Stop();
             }
         }
 
@@ -164,6 +163,7 @@ namespace Server
                     {
                         Broadcast($"+++ {cl.user} go for a walk +++");
                         clients.Remove(cl);
+                        users.Save();
                         clientRunning = false;
                         break;
                     }
@@ -175,6 +175,7 @@ namespace Server
 
                     Message m = new Message(msg, cl.user);
                     messages.Add(m);
+                    messages.Save();
                     Console.WriteLine(m);
 
                     cl.PrintInLine(">>");
@@ -206,7 +207,7 @@ namespace Server
             {
                 cl.Print(messages.GetMessagesForUser(cl.user));
                 cl.user.LastSeen = DateTime.Now;
-                
+
             }
         }
     }

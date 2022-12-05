@@ -51,14 +51,18 @@ namespace Server
 
         public void Save()
         {
-            string jsonString = JsonSerializer.Serialize(messages);
-
-            if (!File.Exists(path))
+            lock (this)
             {
-                using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
-            }
 
-            File.WriteAllText(path, jsonString);
+                string jsonString = JsonSerializer.Serialize(messages);
+
+                if (!File.Exists(path))
+                {
+                    using StreamWriter sw = new StreamWriter(new FileStream(path, FileMode.Create));
+                }
+
+                File.WriteAllText(path, jsonString);
+            }
         }
 
         public void GetFromFile(string filename)

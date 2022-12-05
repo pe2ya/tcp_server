@@ -27,9 +27,15 @@ namespace Server
         {
             int index = users.FindIndex(x => x.Compare(u));
 
-            if (index >= 0) users[index] = u;
+            if (index >= 0)
+            {
+                users[index] = u;
+            }
 
-            else users.Add(u);
+            else
+            {
+                users.Add(u);
+            }
         }
 
         public void UpdateTime(User u)
