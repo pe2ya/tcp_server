@@ -1,0 +1,13 @@
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\bin\Debug\net6.0\Cipher.dll.config
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\bin\Debug\net6.0\Cipher.deps.json
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\bin\Debug\net6.0\Cipher.dll
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\bin\Debug\net6.0\Cipher.pdb
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.AssemblyInfo.cs
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.dll
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\refint\Cipher.dll
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\Cipher.pdb
+C:\Users\Admin\Desktop\TCP_server_client\vendor\Cipher\Cipher\obj\Debug\net6.0\ref\Cipher.dll
