@@ -8,6 +8,9 @@ namespace Server
 {
     class Program
     {
+        /// <summary>
+        /// Class Program; uses only for start the program
+        /// </summary>
         static void Main(string[] args)
         {
             Server sw = new Server();

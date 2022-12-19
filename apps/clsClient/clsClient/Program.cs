@@ -13,6 +13,10 @@ namespace clsClient
 {
     class Program
     {
+        /// <summary>
+        /// Class Program; uses only for start the program
+        /// </summary>
+
         static void Main(string[] args)
         {
             ClsClient program = new ClsClient();

@@ -9,8 +9,21 @@ using System.Threading;
 
 namespace Server
 {
+    /// <summary>
+    ///  class Server; all program commmunicates with different parts of code
+    /// </summary>
     class Server
     {
+
+        /// <summary>
+        /// <param name="myServer">tcl listener which accept new clients</param>
+        /// <param name="isRunning">used for while loop</param>
+        /// <param name="clients">list of clients; store clients which connected to the server</param>
+        /// <param name="users">object class Users; store users which connected to the server</param>
+        /// <param name="messages">object class Messages;used for store messages which was sent to the server</param>
+        /// <param name="ip">tcp server ip</param>
+        /// <param name="port">tcp server port</param>
+        /// </summary>
         private TcpListener myServer;
         private bool isRurung;
         private List<Client> clients = new List<Client>();
@@ -20,6 +33,11 @@ namespace Server
         private int port = Convert.ToInt32(Stat.GetConf("port"));
 
 
+        /// <summary>
+        /// class constructor
+        /// create server and start it
+        /// also initialize Messages and Users objects
+        /// </summary>
         public Server()
         {
             myServer = new TcpListener(localaddr: System.Net.IPAddress.Parse(ip), port: port);
@@ -32,6 +50,11 @@ namespace Server
             LoopServer();
         }
 
+        /// <summary>
+        /// Method which start the program
+        /// waiting for connect new users to the server
+        /// start new thread for new client
+        /// </summary>
         public void LoopServer()
         {
             try
@@ -63,6 +86,12 @@ namespace Server
             }
         }
 
+        /// <summary>
+        /// Start loop for new client 
+        /// receive data from client and and data to him from another clients
+        /// also recognise new client 
+        /// </summary>
+        /// <param name="obj">tcpclient which connected to the server</param>
         public void ClientLoop(object obj)
         {
             Client cl = new Client((TcpClient)obj);
@@ -90,14 +119,14 @@ namespace Server
                         cl.Print("You don't have any attempts");
                     }
 
-                    cl.Print("Type: 1 - for login; 2 - for sing up");
+                    cl.Print("Type: log - for login; sup - for sing up");
 
                     msg = cl.Read();
                     Console.WriteLine(msg);
 
                     switch (msg)
                     {
-                        case "1":
+                        case "log":
                             while (attempts > 0)
                             {
                                 cl.Print("Enter login: ");
@@ -120,7 +149,7 @@ namespace Server
                                 }
                             }
                             break;
-                        case "2":
+                        case "sup":
                             cl.Print("Enter name: ");
 
                             name = cl.Read();
@@ -148,7 +177,7 @@ namespace Server
 
                 }
 
-                Broadcast($"+++ {cl.user.Login} arrived +++");
+                Broadcast($"--- {cl.user.Login} arrived ---");
 
                 cl.Print("Type /quit for disconnect");
 
@@ -193,6 +222,10 @@ namespace Server
             }
         }
 
+        /// <summary>
+        /// Broadcast send text to all clients connected to the server
+        /// </summary>
+        /// <param name="text"></param>
         public void Broadcast(string text)
         {
             Console.WriteLine(text);
@@ -202,6 +235,10 @@ namespace Server
             } 
         }
 
+        /// <summary>
+        /// Broadcast send all messages for user except users messages
+        /// and update time received messages for users which received messages
+        /// </summary>
         public void Broadcast()
         {
             foreach (Client cl in clients)

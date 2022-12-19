@@ -11,26 +11,43 @@ using Microsoft.Win32;
 
 namespace clsClient
 {
+    /// <summary>
+    ///  class clsClient; all program commmunicates with different parts of code
+    /// </summary>
     public class ClsClient
     {
+        /// <summary>
+        /// <param name="attempts">amount of attempts to restore connection with tcp server</param>
+        /// <param name="cl">object class Client; used for operations with tcp client</param>
+        /// <param name="buffer">object class buffer; store messages which cannot send to the server</param>
+        /// <param name="isRunning">used for while loop</param>
+        /// <param name="msg">used for store data from console</param>
+        /// <param name="receiveData">Parallel thread used for receive data from server</param>
+        /// </summary>
         private int attempts = 0;
         private Client cl;
         private Buffer buffer = new Buffer();
         private bool isRunning = true;
         private string msg = string.Empty;
 
-        Thread receiveData, restoreConnection;
-        
-
-        public object locker = new object();
+        Thread receiveData;
 
 
+        /// <summary>
+        /// class constactor
+        /// </summary>
         public ClsClient() 
         {
             cl = new Client();
 
             Start();
         }
+
+        /// <summary>
+        /// Method which start the program
+        /// start parallel thread for receive data
+        /// waiting for console input and call Write method
+        /// </summary>
 
         public void Start()
         {
@@ -74,6 +91,15 @@ namespace clsClient
             }
         }
 
+        /// <summary>
+        /// Method check connection with server
+        /// if there is a connection with server send msg to the server 
+        /// and if attempts more then zero method will start again parallel thread which will receive data from server and show msg in buffer
+        /// if there is no connection with server method will save msg to buffer and try to restore connection
+        /// 
+        /// </summary>
+        /// <param name="msg">console input(string)</param>
+
         public void Write(string msg)
         {
 
@@ -103,11 +129,19 @@ namespace clsClient
             }
         }
 
+        /// <summary>
+        ///  Method save msg to buffer
+        /// </summary>
+        /// <param name="msg">input from console(string)</param>
+        /// 
         public void SaveToBuffer(string msg)
         {
             buffer.Add(msg);
         }
 
+        /// <summary>
+        /// Method send messages to server from buffer if there is some data
+        /// </summary>
         public void SendToServer()
         {
             if (buffer.Length() > 0)
@@ -115,20 +149,5 @@ namespace clsClient
                 buffer.Send(cl);
             }
         }
-
-        //public void ReceiveData(object cl)
-        //{
-        //    TcpClient tcpClient = (TcpClient)cl;
-
-        //    StreamReader sr = new StreamReader(tcpClient.GetStream(), Encoding.UTF8);
-        //    string line;
-
-        //    while ((line = sr.ReadLine()) != null)
-        //    {
-        //        Console.WriteLine(line);
-        //    }
-        //    sr.Close();
-
-        //}
     }
 }
