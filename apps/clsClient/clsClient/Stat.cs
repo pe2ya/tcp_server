@@ -26,9 +26,9 @@ namespace clsClient
 
         public static string GetConf(string key)
         {
-            
-            Configuration config = ConfigurationManager.OpenExeConfiguration(path);
-            string result = config.AppSettings.Settings[key].Value;
+            string result = ConfigurationManager.AppSettings.Get(key);
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(path);
+            //string result = config.AppSettings.Settings[key].Value;
             return result;
         }
 

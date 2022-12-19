@@ -13,7 +13,7 @@ namespace Server
         /// Static class; contains static method which you can use in any another class
         /// <param name="path"> path to the config file</param>
         /// </summary>
-        static string path = "../../../../../../config/app.config";
+        static string path = @"../../../../../../config/app.config";
 
 
         /// <summary>
@@ -25,8 +25,9 @@ namespace Server
         public static string GetConf(string key)
         {
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(path);
-            string result = config.AppSettings.Settings[key].Value;
+            string result = ConfigurationManager.AppSettings.Get(key);
+            //string result = config.AppSettings.Settings[key].Value;
+
             return result;
         }
     }

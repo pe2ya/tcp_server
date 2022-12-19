@@ -108,8 +108,14 @@ namespace Server
         /// <returns>decrypted text or if connection lost return null</returns>
         public string Read()
         {
-            decrypt = Cipher.Cipher.Decrypt(sr.ReadLine());
-            return decrypt; 
+            string result = sr.ReadLine();
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                result = Cipher.Cipher.Decrypt(result);
+            }
+
+            return result;
         }
 
 

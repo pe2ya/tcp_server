@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\TCP_server_client\\apps\\clsClient\\clsClient\\clsClient.csproj": {}
+    "C:\\Users\\petii\\Desktop\\tcp_server\\apps\\clsClient\\clsClient\\clsClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\TCP_server_client\\apps\\clsClient\\clsClient\\clsClient.csproj": {
+    "C:\\Users\\petii\\Desktop\\tcp_server\\apps\\clsClient\\clsClient\\clsClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\TCP_server_client\\apps\\clsClient\\clsClient\\clsClient.csproj",
+        "projectUniqueName": "C:\\Users\\petii\\Desktop\\tcp_server\\apps\\clsClient\\clsClient\\clsClient.csproj",
         "projectName": "clsClient",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\TCP_server_client\\apps\\clsClient\\clsClient\\clsClient.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\TCP_server_client\\apps\\clsClient\\clsClient\\obj\\",
+        "projectPath": "C:\\Users\\petii\\Desktop\\tcp_server\\apps\\clsClient\\clsClient\\clsClient.csproj",
+        "packagesPath": "C:\\Users\\petii\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\petii\\Desktop\\tcp_server\\apps\\clsClient\\clsClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\petii\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -59,8 +59,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -69,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -192,7 +192,7 @@ namespace Server
 
                     if (msg == "/quit")
                     {
-                        Broadcast($"+++ {cl.user} go for a walk +++");
+                        Broadcast($"--- {cl.user} went for a walk ---");
                         clients.Remove(cl);
                         clientRunning = false;
                         break;
